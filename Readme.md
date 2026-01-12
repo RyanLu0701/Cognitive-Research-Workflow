@@ -77,8 +77,16 @@ and does not claim scientific truth.
 It enables academic-style reasoning without hallucination.
 
 ---
+ 
+### 5. Technical Depth & Fidelity
+Depth is not an option; it is a requirement. The system enforces:
+- **Mathematical Rigor**: Every core finding must include its technical mechanism.
+- **Content Parity**: Strictly forbidding information loss between draft and final output.
+- **Exemplar-Driven Generation**: Using established examples (see `Examples/`) as mandatory benchmarks for quality.
 
-## System Structure
+----
+ 
+ ## System Structure
 
 - **Workflow Layer** → execution order
 - **Tool Layer** → concrete operations
@@ -145,7 +153,8 @@ It is a **design pattern for trustworthy LLM-assisted research**.
 - **Tool Specs**: stable
 - **Thinking Layer**: v1
 - **Contribution Layer**: v1
-- **Quality Gates**: v1
+- **Quality Gates**: v1.1 (Depth-Aware)
+- **Technical Depth Policy**: v1.1
 
 This system is designed to evolve.
 
