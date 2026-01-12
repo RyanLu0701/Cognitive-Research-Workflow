@@ -121,9 +121,33 @@ Final Output: academic research report
  
  ## Examples
  
- - [Academic Research Report: Generative Data Quality Assessment (2016-2026)](file:///c:/Users/a3378/Desktop/Cognitive-Research-Workflow/Examples/Example_Academic_Research_Report.md)
+ - [Academic Research Report: Generative Data Quality Assessment (2016-2026)](Examples/Example_Academic_Research_Report.md)
  
  ---
+
+## Academic Mode Output Sample
+
+When the system is set to **Academic Mode**, it goes beyond simple summarization to provide deep technical analysis, formal definitions, and hypothetical research contributions.
+
+### Key Characteristics:
+- **Formalization**: Expressing relationships through mathematical notations and theorems.
+- **Conceptual Abstraction**: Proposing new frameworks (e.g., "Synergy-Risk Triangle").
+- **Structural Depth**: Detailed methodology and taxonomy systems.
+
+### Snippet from Example:
+
+> #### 4. Formal Academic Contributions
+> 
+> **4.1 The Synergy-Risk Triangle**
+> We propose a non-linear dynamical relationship model. Let **F** be Fidelity, **U** be Utility, and **P** be Privacy protection:
+> - **Theorem**: There exists a parameter set $ \theta $ such that after a specific threshold, $\Delta F \propto \Delta U \propto -\Delta P $.
+> - **Conclusion**: A high-quality evaluation framework should not pursue the maximization of a single indicator but seek a triangular balance.
+> 
+> **4.2 Judge-Consistency Metric (LC)**
+> For emerging technologies like G-Eval based on Chain-of-Thought (CoT), this report formally defines the LC metric:
+> $$ LC = 1 - \frac{\text{Var}(S_{LLM})}{\text{Var}(S_{Human})} $$
+
+---
  
  ## Intended Audience
 
