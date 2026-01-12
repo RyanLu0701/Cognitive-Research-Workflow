@@ -158,7 +158,10 @@ Propose a testable research hypothesis that logically follows from observed tren
 ### Step 1 — Pattern Extraction
 - Analyze the `confirmed_information_table`
 - Identify dominant trends, gaps, and contrasts
-
+- At least one contribution must explicitly address
+  a limitation or gap identified in academic_framing_notes,
+  with an explicit reference to the corresponding gap statement.
+  
 ### Step 2 — Contribution Synthesis
 Generate exactly:
 - 1 conceptual contribution
@@ -209,3 +212,7 @@ This tool exists to:
   - explicit abstraction
   - formal structural representation
   - hypothesis generation grounded in observed evidence
+
+## Additional Requirement:
+- At least one contribution must explicitly address
+  a limitation or gap identified in academic_framing_notes.

@@ -9,8 +9,8 @@ AgentResearchSkill defines a reusable research workflow that enables an agent to
 5. generate a formal research report
 6. iteratively refine results based on confirmation feedback
 
-This skill focuses on **workflow orchestration and output artifacts**.  
-User interaction is handled by the agent runtime.
+This skill focuses on **workflow structure and output artifacts**.  
+Execution control and routing decisions are handled externally by the orchestration layer.
 
 ---
 
@@ -46,7 +46,8 @@ User interaction is handled by the agent runtime.
 - Filter results based on the specified time range
 - Collect representative and relevant sources
 
-**Output:** raw_information_set
+**Output:** raw_information_set  
+Run: Gate A — Coverage Gate
 
 ---
 
@@ -56,7 +57,8 @@ User interaction is handled by the agent runtime.
 - Group information into structured categories
 - Do not judge quality or completeness
 
-**Output:** categorized_information_set
+**Output:** categorized_information_set  
+Run: Gate B — Taxonomy Gate
 
 ---
 
@@ -70,7 +72,8 @@ User interaction is handled by the agent runtime.
 
 | category | title | author(s) | publication_year | source / venue | url | abstract / summary |
 
-**Output:** extracted_information_table
+**Output:** extracted_information_table  
+Run: Gate C — Table Integrity Gate
 
 ---
 
@@ -81,43 +84,64 @@ User interaction is handled by the agent runtime.
 - Collect confirmation feedback
 
 **Decision:**
-- If approved → proceed to Step 5
-- If revision requested → return to Step 2 or Step 3 with feedback
+- If approved → proceed to Step 4.2
+- If revision requested → return to Step 2 or Step 3
 
 ---
-### Step 4.5 — Contribution Generation
+
+### Step 4.2 — Academic Framing  
+(see `Research/academic_framing.md`)
+
+Goal:
+- explicitly articulate why this review must exist academically
+
+Actions:
+- identify existing survey / overview works
+- analyze their limitations and blind spots
+- formulate a clear review gap statement
+- position the proposed review relative to existing surveys
+
+Constraints:
+- no new external sources
+- all claims traceable to confirmed entries
+
+**Output:** academic_framing_notes
+
+---
+
+### Step 4.5 — Contribution Generation  
 (see `Research/contribution_generation.md`)
 
 Goal:
 - generate conceptual, formal, or hypothesis-level contributions
-- do NOT introduce new external sources
+- contributions MUST address gaps identified in academic_framing_notes
 
-Output:
-- contribution_notes (concepts / equations / hypotheses)
-
-Quality Constraint:
-- each contribution must reference confirmed table entries
-- speculative elements must be labeled
+Constraints:
+- no new external sources
+- speculative elements explicitly labeled
+- all contributions mapped to confirmed entries
 
 **Output:** contribution_notes
 
 ---
+
 ### Step 5 — Report Making  
 (see `Research/report_making.md`)
 
-- Generate a draft research report from confirmed information
-- Summarize and synthesize table content into a single document
-- Do not introduce unconfirmed sources
+- Follow the Survey / Review report specification
+- Generate a draft report based on:
+  - confirmed_information_table
+  - academic_framing_notes
+  - contribution_notes
 
-**Report Structure:**
-- Introduction
-- Method
-- Result
-- Analysis
-- Conclusion
-- Future Work
+The report MUST explicitly reflect:
+- the identified review gap
+- the organizing perspective
+- the taxonomy rationale
 
-**Output:** draft_research_report
+**Output:** draft_research_report  
+Run: Gate D — Report Evidence Gate  
+Run: Gate E — Academic Adequacy Gate
 
 ---
 
@@ -128,17 +152,35 @@ Quality Constraint:
 - Collect confirmation feedback
 
 **Decision:**
-- If approved → terminate workflow
-- If revision requested → return to Step 5 with feedback
+- If approved → proceed to Step 7
+- If revision requested:
+  - writing/structure issues → Step 5
+  - framing issues → Step 4.2
+  - contribution issues → Step 4.5
 
-### Step 7 — Report Output
+---
+
+### Step 7 — Report Output  
 (see `Research/report_output.md`)
 
-- Format and deliver the approved research report
-- Follow user-defined output specification (e.g. pdf, excel, table)
-- No content modification is allowed at this stage
+- Format and deliver the approved report
+- Follow user-defined output specification
+- No content modification allowed
 
-**Output:** final_research_report (pdf / excel / table)
+**Output:** final_research_report
+
+---
+
+## Orchestration Integration (Non-Step)
+
+This workflow is executed under an external orchestration loop:
+
+- Strategy-level thinking: `Think/orchestrator.md`
+- Runtime routing logic: `Think/orchestrator_runtime.md`
+- Routing rules: `Think/decision_matrix.md`
+
+The orchestrator is **not** a workflow step.  
+It wraps the workflow and determines next-step routing based on gate results and user feedback.
 
 ---
 
@@ -147,40 +189,32 @@ Quality Constraint:
 - Information Search
 - Information Categorization
 - Information Extraction
-- Structured Summarization
-- Report Generation
+- Academic Framing
+- Contribution Generation
+- Structured Report Synthesis
 - Human-in-the-loop Validation
 - Iterative Refinement
 
 ---
 
-## Thinking Layer
-(see `Think/orchestrator.md`)
-
-Defines the **thinking modes and evaluation perspectives**
-used to guide decisions between workflow steps.
-
----
-
 ## Quality Assurance
-(see `QA/quality_assurance.md`)
+(see `Quality/quality_assurance.md`)
 
-Defines post-generation quality checks applied to the report output.
-
-## Decision Logic
-(see `Think/decision_matrix.md`)
-
-Defines routing decisions based on quality gates.
+Defines post-generation quality checks applied to report outputs.
 
 ---
-## Potential Issues (Reference for Thinking / QA Layers)
 
-Common issues that may occur during execution include:
-1. Excessive or irrelevant information
-2. Information outside the intended time range
-3. Insufficient information coverage
-4. Incomplete representation of topic development
+## Potential Issues (Handled by Thinking & QA Layers)
 
-These issues should be handled by:
-- Thinking Layer: deciding whether to route back to Search / Categorization
-- QA Layer: validating final report completeness and relevance
+Common issues include:
+1. Insufficient or skewed information coverage
+2. Weak or unclear taxonomy
+3. Incomplete or inconsistent metadata
+4. Unclear academic motivation or review gap
+5. Misaligned or weak research contributions
+6. Narrative or presentation issues
+
+These issues are handled by:
+- **Thinking Layer**: deciding refinement strategy and routing
+- **Decision Matrix**: determining where to route
+- **QA Layer**: validating output adequacy

@@ -15,6 +15,8 @@ This tool does NOT:
 - modify content
 - introduce new information
 - perform reasoning or validation
+- **[STRICT] Summarize, truncate, or simplify the approved report.**
+- **[STRICT] Change the technical level or detail of the approved report.**
 
 ---
 
@@ -35,7 +37,8 @@ This tool does NOT:
 
 1. Receive approved research report
 2. Apply formatting according to output specification
-3. Deliver final artifact to the user
+3. **[CRITICAL]** Verify that 1:1 content parity is maintained between the approved draft and the final artifact.
+4. Deliver final artifact to the user
 
 ---
 

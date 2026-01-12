@@ -110,8 +110,14 @@ Final Output: academic research report
 - research-style report draft
 
 ---
-
-## Intended Audience
+ 
+ ## Examples
+ 
+ - [Academic Research Report: Generative Data Quality Assessment (2016-2026)](file:///c:/Users/a3378/Desktop/Cognitive-Research-Workflow/Examples/Example_Academic_Research_Report.md)
+ 
+ ---
+ 
+ ## Intended Audience
 
 This project is intended for:
 - researchers
